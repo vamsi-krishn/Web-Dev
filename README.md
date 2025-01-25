@@ -1,308 +1,164 @@
-# React + Vite
+# Full-Stack Web Application: User Registration and Data View
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project is a full-stack web application built using modern web technologies. It facilitates user registration through an interactive form and displays the submitted data in a user-friendly, tabular format. The application integrates HTML, CSS, JavaScript, and React for a seamless user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-// Import necessary dependencies
-import React from 'react';  // Core React library
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Router components for navigation
-import UserForm from './components/UserForm';  // Import UserForm component
-import DataView from './components/DataView';  // Import DataView component
+## Features
 
-// Main App component
-function App() {
-  return (
-    // Router: Enables client-side routing
-    <Router>
-      // Routes: Container for all Route definitions
-      <Routes>
-        // Route for home page ('/') - renders UserForm
-        <Route path="/" element={<UserForm />} />
-        // Route for data view page ('/view') - renders DataView
-        <Route path="/view" element={<DataView />} />
-      </Routes>
-    </Router>
-  );
-}
+1. **User Registration Form**:
+   - HTML form elements for user inputs (First Name, Last Name, Gender, Organization, Contact Number, and Email).
+   - Client-side JavaScript validation for required fields and proper formatting (e.g., email, contact number).
 
-export default App;  // Export App component for use in other files
+2. **Data Display**:
+   - Dynamically displays submitted form data in a responsive table.
+   - Interactive elements like a "Back to Form" button for navigation.
 
+3. **Responsive Design**:
+   - Tailwind CSS for styling with a focus on mobile-first design.
+   - Gradient backgrounds, cards, and hover effects for a polished UI.
 
-// Import necessary dependencies
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';  // Hooks for routing
-import { ArrowLeft, ClipboardList } from 'lucide-react';  // Icons
+4. **React Integration**:
+   - React components handle dynamic rendering and state management.
+   - React Router for seamless client-side navigation.
 
-const DataView = () => {
-  // useLocation: Access the current location object (contains state passed during navigation)
-  const location = useLocation();
-  // useNavigate: Get navigation function for programmatic routing
-  const navigate = useNavigate();
-  // Extract formData from location state
-  const { formData } = location.state;
+5. **JavaScript**:
+   - Form validation and interactivity.
+   - Dynamic DOM manipulation using React and native JavaScript.
 
-  return (
-    // Container div with gradient background
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      {/* Tailwind classes explained:
-          min-h-screen: Minimum height of 100vh
-          bg-gradient-to-br: Background gradient bottom-right
-          from-blue-50: Starting color of gradient
-          to-indigo-100: Ending color of gradient
-          py-12: Padding top/bottom 3rem
-          px-4: Padding left/right 1rem
-          sm:px-6: Padding left/right 1.5rem on small screens
-          lg:px-8: Padding left/right 2rem on large screens */}
-      
-      // White card container
-      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-        {/* max-w-3xl: Maximum width 48rem
-            mx-auto: Center horizontally
-            rounded-xl: Large border radius
-            shadow-lg: Large box shadow
-            overflow-hidden: Hide overflow content */}
+---
 
-        // Content padding container
-        <div className="px-6 py-8">
-          // Header section with back button and title
-          <div className="flex items-center justify-between mb-8">
-            // Back button
-            <button
-              onClick={() => navigate('/')}
-              className="flex items-center text-indigo-600 hover:text-indigo-800"
-            >
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Form
-            </button>
-            
-            // Title with icon
-            <div className="flex items-center">
-              <ClipboardList className="h-8 w-8 text-indigo-600 mr-2" />
-              <h2 className="text-2xl font-bold text-gray-900">Submitted Data</h2>
-            </div>
-          </div>
+## Tech Stack
 
-          // Table container
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              // Table header
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Field
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Value
-                  </th>
-                </tr>
-              </thead>
-              
-              // Table body
-              <tbody className="bg-white divide-y divide-gray-200">
-                {/* Map through formData to create table rows */}
-                {Object.entries(formData).map(([key, value]) => (
-                  <tr key={key} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {/* Convert camelCase to Title Case */}
-                      {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {value || '-'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+- **Frontend**:
+  - **HTML**: Semantic markup for structuring the application.
+  - **CSS**: Tailwind CSS for utility-first styling.
+  - **JavaScript**: Core language for interactivity and logic.
+  - **React**: JavaScript library for building dynamic user interfaces.
 
-export default DataView;
+- **Build Tool**:
+  - **Vite**: Fast build tool for modern web applications.
 
+- **Icons**:
+  - Lucide React: Lightweight icon library.
 
-// Import necessary dependencies
-import React, { useState } from 'react';  // React and useState hook for managing form state
-import { useNavigate } from 'react-router-dom';  // For programmatic navigation
-import { UserCircle } from 'lucide-react';  // User icon from Lucide
+---
 
-const UserForm = () => {
-  // useNavigate hook for programmatic navigation after form submission
-  const navigate = useNavigate();
-  
-  // Form state using useState hook
-  // Initial state is an object with empty strings for all fields
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    gender: '',
-    organization: '',
-    email: '',
-    contactNumber: '',
-  });
+## Installation
 
-  // Form submission handler
-  const handleSubmit = (e) => {
-    e.preventDefault();  // Prevent default form submission behavior
-    // Navigate to /view route with form data passed as state
-    navigate('/view', { state: { formData } });
-  };
+### Prerequisites
 
-  // Input change handler
-  // Updates form state when user types or selects options
-  const handleChange = (e) => {
-    const { name, value } = e.target;  // Destructure name and value from event target
-    setFormData(prev => ({
-      ...prev,           // Spread previous state
-      [name]: value     // Update only the changed field
-    }));
-  };
+Ensure you have the following installed:
 
-  return (
-    // Main container with gradient background
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      {/* White card container */}
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-        <div className="px-6 py-8">
-          {/* Header with icon */}
-          <div className="flex justify-center mb-6">
-            <UserCircle className="h-12 w-12 text-indigo-600" />
-          </div>
-          <h2 className="text-center text-2xl font-bold text-gray-900 mb-8">
-            User Registration
-          </h2>
+- **Node.js** (>= 14.18.0)
+- **npm** or **yarn**
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* First Name Field */}
-            <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                First Name
-              </label>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                required
-                value={formData.firstName}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
-              />
-            </div>
+### Steps
 
-            {/* Last Name Field */}
-            <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
-                Last Name
-              </label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                required
-                value={formData.lastName}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
-              />
-            </div>
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/your-repo.git
+   cd your-repo
+   ```
 
-            {/* Gender Field */}
-            <div>
-              <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
-                Gender
-              </label>
-              <select
-                name="gender"
-                id="gender"
-                required
-                value={formData.gender}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Others">Others</option>
-              </select>
-            </div>
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-            {/* Organization Field */}
-            <div>
-              <label htmlFor="organization" className="block text-sm font-medium text-gray-700">
-                Organization
-              </label>
-              <select
-                name="organization"
-                id="organization"
-                required
-                value={formData.organization}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
-              >
-                <option value="">Select Organization</option>
-                <option value="Eminds">Eminds</option>
-                <option value="Viasat">Viasat</option>
-                <option value="Flipkart">Flipkart</option>  
-                
-              </select>
-            </div>
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-            {/* Contact Number Field */}
-            <div>
-              <label htmlFor="contactNumber" className="block text-sm font-medium text-gray-700">
-                Contact Number
-              </label>
-              <input
-                type="tel"
-                name="contactNumber"
-                id="contactNumber"
-                required
-                pattern="[0-9]{10}"  // Validates 10-digit number
-                placeholder="10-digit mobile number"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
-              />
-            </div>
+4. Open the application in your browser:
+   ```
+   http://localhost:5173
+   ```
 
-            {/* Email Field */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"  // HTML5 email validation
-                name="email"
-                id="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 border"
-              />
-            </div>
+---
 
-            {/* Submit Button */}
-            <div>
-              <button
-                type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-};
+## How It Works
 
-export default UserForm;
-#   W e b - D e v  
- 
+1. **HTML**:
+   - Used for creating the structure of the application, including the form and table.
+
+2. **CSS**:
+   - Tailwind CSS provides utility classes for styling elements.
+   - Ensures a responsive design with consistent spacing and alignment.
+
+3. **JavaScript**:
+   - Validates form fields for correctness and completeness.
+   - Handles user interactions such as form submission and navigation.
+
+4. **React**:
+   - Dynamically updates the UI based on user actions.
+   - Manages state for form inputs and submitted data.
+
+5. **Routing**:
+   - React Router is used for navigation between the form (`/`) and data view (`/view`).
+
+---
+
+## Folder Structure
+
+```
+project-root/
+├── src/
+│   ├── components/
+│   │   ├── UserForm.jsx       # Form component for user input
+│   │   ├── DataView.jsx       # Data view component
+│   ├── App.jsx                # Main application component
+│   ├── main.jsx               # Application entry point
+├── public/
+├── index.html                 # Main HTML file
+├── styles.css                 # Additional custom CSS (if needed)
+├── package.json               # Dependencies and scripts
+├── tailwind.config.js         # Tailwind CSS configuration
+├── vite.config.js             # Vite configuration
+└── README.md                  # Project documentation
+```
+
+---
+
+## Screenshots
+
+### User Registration Form
+![User Form Screenshot](screenshot-form.png)
+
+### Data View
+![Data View Screenshot](screenshot-data-view.png)
+
+---
+
+## Scripts
+
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the app for production.
+- `npm run preview`: Previews the production build locally.
+
+---
+
+## Future Improvements
+
+- Add server-side validation and integration with a database.
+- Implement authentication for secure data access.
+- Enhance styling with animations and transitions.
+
+---
+
+## License
+
+This project is licensed under the MIT License. Feel free to use and modify it as per your needs.
+
+---
+
+## Acknowledgments
+
+- [Vite](https://vitejs.dev/)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
+
